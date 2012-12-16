@@ -17,6 +17,6 @@ What this script does:
 4. run `update_releases.php` to create releases form binaries.
 5. run `backfill_threaded.php` to pull backfills upto current backfill.
 6. run `update_releases.php` to create releases form binaries.
-7. run `update_parsing.php` to turn some of those hashed titles into proper release.
+7. run `update_parsing.php` to turn some of those hashed titles into a proper release.
 8. run `${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD}"` to increment the backfill by 1.
 9. Wash and repeat.

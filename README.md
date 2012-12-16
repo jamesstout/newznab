@@ -11,6 +11,7 @@ You can run this in screen or from cron.
 
 What this script does:
 1) run update_binaries_threaded.php pulls binaries for all active groups.
+
 2) run update_releases.php to create releases form binaries.
 3) run nzb-importmodified.php and import 100 nzbs from local filesystem.
 4) run update_releases.php to create releases form binaries.

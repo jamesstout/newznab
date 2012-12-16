@@ -8,6 +8,8 @@ Copy update_parsing.php to misc/update_scripts/ and edit as needed.
 
 Copy update_cleanup.php to misc/update_scripts/ and edit as needed.
 
+Copy removespecial.php to misc/update_scripts/ and edit as needed.
+
 You can run this in screen or from cron.
 
 
@@ -21,5 +23,6 @@ What this script does:
 6.  run `update_releases.php` to create releases form binaries.
 7.  run `update_parsing.php` to turn some of those hashed titles into a proper release.
 8.  run `update_cleanup.php` to do some *cleanup*.
-9.  Increment the backfill for all active groups by 1.
-10. Wash and repeat.
+9.  run `removespecial.php` to do some more *cleanup*.
+10.  Increment the backfill for all active groups by 1.
+11. Wash and repeat.

@@ -19,3 +19,4 @@ What this script does:
 7) run update_parsing.php to turn some of those hashed titles into proper release.
 8) run ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD}" to increment the backfill by 1.
 9) Wash and repeat.
+

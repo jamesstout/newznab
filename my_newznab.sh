@@ -29,6 +29,7 @@ cd ${NEWZNAB_PATH}
 /usr/bin/php5 ${NEWZNAB_PATH}/backfill_threaded.php
 /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
 /usr/bin/php5 ${NEWZNAB_PATH}/update_parsing.php
+/usr/bin/php5 ${NEWZNAB_PATH}/update_cleanup.php
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD}"
 
 DIFF=$(($CURRTIME-$LASTOPTIMIZE))

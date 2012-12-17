@@ -22,7 +22,7 @@ What this script does:
 5.  run `backfill_threaded.php` to pull backfills upto current backfill.
 6.  run `update_releases.php` to create releases form binaries.
 7.  run `update_parsing.php` to turn some of those hashed titles into a proper release.
-8.  run `update_cleanup.php` to do some *cleanup*.
-9.  run `removespecial.php` to do some more *cleanup*.
+8.  run `removespecial.php` to do some more *cleanup*. 
+9.  run `update_cleanup.php` to do some *cleanup*.
 10.  Increment the backfill for all active groups by 1.
 11. Wash and repeat.

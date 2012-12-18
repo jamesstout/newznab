@@ -22,7 +22,7 @@ What this script does:
 3.  run `update_releases.php` to create releases form binaries.
 4.  run `nzb-importmodified.php` and import 100 nzbs from local filesystem.
 5.  run `update_releases.php` to create releases form binaries.
-6.  Set retention=0/
+6.  Set retention=0.
 7.  run `backfill_threaded.php` to pull backfills upto current backfill.
 8.  run `update_releases.php` to create releases form binaries.
 9.  Reset retention back to what you set.

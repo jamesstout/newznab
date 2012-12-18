@@ -31,8 +31,8 @@ ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD2}"
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD3}"
 /usr/bin/php5 ${NEWZNAB_ADMIN_PATH}/nzb-importmodified.php ${NZBS} true
 /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
-#/usr/bin/php5 ${NEWZNAB_PATH}/backfill_threaded.php
-#/usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+/usr/bin/php5 ${NEWZNAB_PATH}/backfill_threaded.php
+/usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD2}"
 /usr/bin/php5 ${NEWZNAB_PATH}/update_predb.php true
 /usr/bin/php5 ${NEWZNAB_PATH}/update_parsing.php

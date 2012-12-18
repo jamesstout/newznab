@@ -10,6 +10,8 @@ Copy update_cleanup.php to misc/update_scripts/ and edit as needed.
 
 Copy removespecial.php to misc/update_scripts/ and edit as needed.
 
+Enter the for nzpre.
+
 You can run this in screen or from cron.
 
 
@@ -21,8 +23,9 @@ What this script does:
 4.  run `update_releases.php` to create releases form binaries.
 5.  run `backfill_threaded.php` to pull backfills upto current backfill.
 6.  run `update_releases.php` to create releases form binaries.
-7.  run `update_parsing.php` to turn some of those hashed titles into a proper release.
-8.  run `removespecial.php` to do some more *cleanup*. 
-9.  run `update_cleanup.php` to do some *cleanup*.
-10.  Increment the backfill for all active groups by 1.
-11. Wash and repeat.
+7.  run `update_predb.php true` to use the nzpre info.
+8.  run `update_parsing.php` to turn some of those hashed titles into a proper release.
+9.  run `removespecial.php` to do some more *cleanup*. 
+10. run `update_cleanup.php` to do some *cleanup*.
+11. Increment the backfill for all active groups by 1.
+12. Wash and repeat.

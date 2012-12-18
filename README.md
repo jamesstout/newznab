@@ -1,6 +1,6 @@
 **Newznab all in one Script**
 
-Be sure to edit the paths, the mysql username, password and database.
+Be sure to edit the paths, the mysql username, password, database, retention and backfill days.
 
 Copy nzb-importmodified.php to www/admin/ and edit as needed.
 

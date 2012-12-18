@@ -35,9 +35,9 @@ ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD3}"
 /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD2}"
 /usr/bin/php5 ${NEWZNAB_PATH}/update_predb.php true
-/usr/bin/php5 ${NEWZNAB_PATH}/update_parsing.php
 /usr/bin/php5 ${NEWZNAB_PATH}/removespecial.php
 /usr/bin/php5 ${NEWZNAB_PATH}/update_cleanup.php
+/usr/bin/php5 ${NEWZNAB_PATH}/update_parsing.php
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD1}"
 
 

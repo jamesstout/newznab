@@ -7,8 +7,9 @@
 set -e
 
 export NEWZNAB_PATH="/var/www/newznab/misc/update_scripts"
+export INNODB_PATH="/var/www/newznab/misc/testing/innodb"
 export NEWZNAB_SLEEP_TIME="10" # in seconds
-export NZBS="/media/newznab/batch"  #path to your nzb files
+export NZBS="/path/to/nzbs"  #path to your nzb files
 export MyUSER="root" #mysql user
 export MyPASS="password" #mysql password
 export DATABASE="newznab"
@@ -33,19 +34,25 @@ cd ${NEWZNAB_PATH}
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD2}"
 
 #make active groups current
-[ -f ${NEWZNAB_PATH}/update_binaries.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_binaries.php
-[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+cd ${INNODB_PATH}
+#[ -f ${NEWZNAB_PATH}/update_binaries.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_binaries.php
+cd ${NEWZNAB_PATH}
+#[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
 
 #set retention days to 0
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD3}"
 
 #import nzb's
+cd ${INNODB_PATH}
 [ -f ${NEWZNAB_PATH}/nzb-import.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/nzb-import.php ${NZBS} true
+cd ${NEWZNAB_PATH}
 [ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
 
 #get backfill for all active groups
-[ -f ${NEWZNAB_PATH}/backfill.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/backfill.php
-[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+cd ${INNODB_PATH}
+#[ -f ${NEWZNAB_PATH}/backfill.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/backfill.php
+cd ${NEWZNAB_PATH}
+#[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
 
 #reset retention days
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD2}"

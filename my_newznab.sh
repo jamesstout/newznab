@@ -9,7 +9,7 @@ export NEWZNAB_ADMIN_PATH="/var/www/newznab/www/admin"
 export NEWZNAB_SLEEP_TIME="10" # in seconds
 export NZBS="/media/newznab/batch"  #path to your nzb files
 export MyUSER="root" #mysql user
-export MyPASS="dfgrfgurge" #mysql password
+export MyPASS="password" #mysql password
 export DATABASE="newznab"
 export MAXDAYS=180  #max days for backfill
 export MAXRET=2  #max days for backfill
@@ -25,19 +25,37 @@ while :
  do
 CURRTIME=`date +%s`
 cd ${NEWZNAB_PATH}
+#update regex's and clear any unfinished work from previous runs
+[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+
+#set retention days
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD2}"
-/usr/bin/php5 ${NEWZNAB_PATH}/update_binaries_threaded.php
-/usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+
+#make active groups current
+[ -f ${NEWZNAB_PATH}/update_binaries_threaded.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_binaries_threaded.php
+[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+
+#set retention days to 0
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD3}"
-/usr/bin/php5 ${NEWZNAB_ADMIN_PATH}/nzb-importmodified.php ${NZBS} true
-/usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
-/usr/bin/php5 ${NEWZNAB_PATH}/backfill_threaded.php
-/usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+
+#import nzb's
+[ -f ${NEWZNAB_ADMIN_PATH}/nzb-importmodified.php ] && /usr/bin/php5 ${NEWZNAB_ADMIN_PATH}/nzb-importmodified.php ${NZBS} true
+[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+
+#get backfill for all active groups
+[ -f ${NEWZNAB_PATH}/backfill_threaded.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/backfill_threaded.php
+[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+
+#reset retention days
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD2}"
-/usr/bin/php5 ${NEWZNAB_PATH}/update_predb.php true
-/usr/bin/php5 ${NEWZNAB_PATH}/removespecial.php
-/usr/bin/php5 ${NEWZNAB_PATH}/update_cleanup.php
-/usr/bin/php5 ${NEWZNAB_PATH}/update_parsing.php
+
+#run some cleanup scripts
+[ -f ${NEWZNAB_PATH}/update_predb.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_predb.php true
+[ -f ${NEWZNAB_PATH}/removespecial.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/removespecial.php
+[ -f ${NEWZNAB_PATH}/update_cleanup.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_cleanup.php
+[ -f ${NEWZNAB_PATH}/update_parsing.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_parsing.php
+
+#increment backfill days
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD1}"
 
 
@@ -45,9 +63,9 @@ DIFF=$(($CURRTIME-$LASTOPTIMIZE))
 if [ "$DIFF" -gt 43200 ] || [ "$DIFF" -lt 1 ]
 then
 	LASTOPTIMIZE=`date +%s`
-	/usr/bin/php5 ${NEWZNAB_PATH}/optimise_db.php
-	/usr/bin/php5 ${NEWZNAB_PATH}/update_tvschedule.php
-	/usr/bin/php5 ${NEWZNAB_PATH}/update_theaters.php
+	[ -f ${NEWZNAB_PATH}/optimise_db.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/optimise_db.php
+	[ -f ${NEWZNAB_PATH}/update_tvschedule.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_tvschedule.php
+	[ -f ${NEWZNAB_PATH}/update_theaters.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_theaters.php
 fi
 
 echo "waiting ${NEWZNAB_SLEEP_TIME} seconds..."

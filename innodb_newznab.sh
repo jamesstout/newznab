@@ -15,7 +15,7 @@ export MyPASS='password' #mysql password
 export DATABASE='newznab'
 export MAXDAYS='180'  #max days for backfill
 export MAXRET='2'  #max days for backfill
-export MYSQL='$(which mysql)'
+export MYSQL="$(which mysql)"
 export MYSQL_CMD1="UPDATE groups set backfill_target=backfill_target+1 where active=1 and backfill_target<$MAXDAYS;"
 export MYSQL_CMD2="UPDATE site set value=$MAXRET where setting='rawretentiondays';"
 export MYSQL_CMD3="UPDATE site set value=0 where setting='rawretentiondays';"

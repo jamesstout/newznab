@@ -18,8 +18,8 @@ export MYSQL_CMD1="UPDATE groups set backfill_target=backfill_target+1 where act
 export MYSQL_CMD2="UPDATE site set value=$MAXRET where setting='rawretentiondays';"
 export MYSQL_CMD3="UPDATE site set value=0 where setting='rawretentiondays';"
 
-LASTOPTIMIZE=`date +%s`
-
+LASTOPTIMIZE1=`date +%s`
+LASTOPTIMIZE2=`date +%s`
 while :
 
  do
@@ -49,10 +49,10 @@ $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD3"
 #reset retention days
 $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD2"
 
-DIFF=$(($CURRTIME-$LASTOPTIMIZE))
+DIFF=$(($CURRTIME-$LASTOPTIMIZE1))
 if [ "$DIFF" -gt 7200 ] || [ "$DIFF" -lt 1 ]
 then
-	LASTOPTIMIZE=`date +%s`
+	LASTOPTIMIZE1=`date +%s`
 	#run some cleanup scripts
 	[ -f $NEWZNAB_PATH/update_predb.php ] && /usr/bin/php5 $NEWZNAB_PATH/update_predb.php true
 	[ -f $NEWZNAB_PATH/removespecial.php ] && /usr/bin/php5 $NEWZNAB_PATH/removespecial.php
@@ -64,10 +64,10 @@ fi
 $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD1"
 
 
-DIFF=$(($CURRTIME-$LASTOPTIMIZE))
+DIFF=$(($CURRTIME-$LASTOPTIMIZE2))
 if [ "$DIFF" -gt 43200 ] || [ "$DIFF" -lt 1 ]
 then
-	LASTOPTIMIZE=`date +%s`
+	LASTOPTIMIZE2=`date +%s`
 	[ -f $NEWZNAB_PATH/optimise_db.php ] && /usr/bin/php5 $NEWZNAB_PATH/optimise_db.php
 	[ -f $NEWZNAB_PATH/update_tvschedule.php ] && /usr/bin/php5 $NEWZNAB_PATH/update_tvschedule.php
 	[ -f $NEWZNAB_PATH/update_theaters.php ] && /usr/bin/php5 $NEWZNAB_PATH/update_theaters.php

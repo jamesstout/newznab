@@ -35,9 +35,9 @@ ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD2}"
 
 #make active groups current
 cd ${INNODB_PATH}
-#[ -f ${NEWZNAB_PATH}/update_binaries.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_binaries.php
+[ -f ${NEWZNAB_PATH}/update_binaries.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_binaries.php
 cd ${NEWZNAB_PATH}
-#[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
 
 #set retention days to 0
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD3}"
@@ -50,18 +50,23 @@ cd ${NEWZNAB_PATH}
 
 #get backfill for all active groups
 cd ${INNODB_PATH}
-#[ -f ${NEWZNAB_PATH}/backfill.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/backfill.php
+[ -f ${NEWZNAB_PATH}/backfill.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/backfill.php
 cd ${NEWZNAB_PATH}
-#[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
+[ -f ${NEWZNAB_PATH}/update_releases.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php
 
 #reset retention days
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD2}"
 
-#run some cleanup scripts
-[ -f ${NEWZNAB_PATH}/update_predb.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_predb.php true
-[ -f ${NEWZNAB_PATH}/removespecial.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/removespecial.php
-[ -f ${NEWZNAB_PATH}/update_cleanup.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_cleanup.php
-[ -f ${NEWZNAB_PATH}/update_parsing.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_parsing.php
+DIFF=$(($CURRTIME-$LASTOPTIMIZE))
+if [ "$DIFF" -gt 7200 ] || [ "$DIFF" -lt 1 ]
+then
+  LASTOPTIMIZE=`date +%s`
+  #run some cleanup scripts
+  [ -f ${NEWZNAB_PATH}/update_predb.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_predb.php true
+  [ -f ${NEWZNAB_PATH}/removespecial.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/removespecial.php
+  [ -f ${NEWZNAB_PATH}/update_cleanup.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_cleanup.php
+  [ -f ${NEWZNAB_PATH}/update_parsing.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_parsing.php
+fi
 
 #increment backfill days
 ${MYSQL} -u ${MyUSER} -p${MyPASS} ${DATABASE} -e "${MYSQL_CMD1}"
@@ -72,11 +77,12 @@ if [ "$DIFF" -gt 43200 ] || [ "$DIFF" -lt 1 ]
 then
   LASTOPTIMIZE=`date +%s`
   [ -f ${NEWZNAB_PATH}/optimise_db.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/optimise_db.php
-	[ -f ${NEWZNAB_PATH}/update_tvschedule.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_tvschedule.php
-	[ -f ${NEWZNAB_PATH}/update_theaters.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_theaters.php
+  [ -f ${NEWZNAB_PATH}/update_tvschedule.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_tvschedule.php
+  [ -f ${NEWZNAB_PATH}/update_theaters.php ] && /usr/bin/php5 ${NEWZNAB_PATH}/update_theaters.php
 fi
 
 echo "waiting ${NEWZNAB_SLEEP_TIME} seconds..."
 sleep ${NEWZNAB_SLEEP_TIME}
 
 done
+

@@ -61,8 +61,8 @@ $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD2"
 DIFF=$(($CURRTIME-$LASTOPTIMIZE1))
 if [ "$DIFF" -gt 7200 ] || [ "$DIFF" -lt 1 ]
 then
-  LASTOPTIMIZE1=`date +%s`
-  #run some cleanup scripts
+	LASTOPTIMIZE1=`date +%s`
+	#run some cleanup scripts
 	[ -f $NEWZNAB_PATH/update_predb.php ] && /usr/bin/php5 $NEWZNAB_PATH/update_predb.php true
 	[ -f $NEWZNAB_PATH/removespecial.php ] && /usr/bin/php5 $NEWZNAB_PATH/removespecial.php
 	[ -f $NEWZNAB_PATH/update_cleanup.php ] && /usr/bin/php5 $NEWZNAB_PATH/update_cleanup.php

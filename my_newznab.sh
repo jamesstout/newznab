@@ -63,6 +63,7 @@ $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD2"
 #make active groups current
 GROUPCOUNT=`$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD4"`
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_binaries_threaded.php on $GROUPCOUNT groups\007\003\n"
+cd $NEWZNAB_PATH
 [ -f $NEWZNAB_PATH/update_binaries_threaded.php ] && $PHP $NEWZNAB_PATH/update_binaries_threaded.php
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n"
 [ -f $NEWZNAB_PATH/update_releases.php ] && $PHP $NEWZNAB_PATH/update_releases.php
@@ -73,8 +74,10 @@ $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD3"
 #import nzb's
 NZBCOUNT=`ls -1 ${NZBS} | wc -l`
 printf "\033]0; Loop $LOOP - Running NEWZNAB_ADMIN_PATH/nzb-importmodified.php ${NZBS} true - $NZBCOUNT nzb's remaining\007\003\n"
+cd $NEWZNAB_ADMIN_PATH
 [ -f $NEWZNAB_ADMIN_PATH/nzb-importmodified.php ] && $PHP $NEWZNAB_ADMIN_PATH/nzb-importmodified.php ${NZBS} true
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n"
+cd $NEWZNAB_PATH
 [ -f $NEWZNAB_PATH/update_releases.php ] && $PHP $NEWZNAB_PATH/update_releases.php
 
 #get backfill for all active groups
@@ -93,6 +96,7 @@ then
 	LASTOPTIMIZE1=`date +%s`
 	#run some cleanup scripts
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_predb.php true\007\003\n"
+	cd $NEWZNAB_PATH
 	[ -f $NEWZNAB_PATH/update_predb.php ] && $PHP $NEWZNAB_PATH/update_predb.php true
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/removespecial.php\007\003\n"
 	[ -f $NEWZNAB_PATH/removespecial.php ] && $PHP $NEWZNAB_PATH/removespecial.php
@@ -100,6 +104,7 @@ then
 	[ -f $NEWZNAB_PATH/update_cleanup.php ] && $PHP $NEWZNAB_PATH/update_cleanup.php
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_parsing.php\007\003\n"
 	[ -f $NEWZNAB_PATH/update_parsing.php ] && $PHP $NEWZNAB_PATH/update_parsing.php
+	cd $TESTING
 	printf "\033]0; Loop $LOOP - Running $TESTING/getConsole.php\007\003\n"
 	[ -f $TESTING/getConsole.php ] && $PHP $TESTING/getConsole.php
 	printf "\033]0; Loop $LOOP - Running $TESTING/getCovers.php\007\003\n"
@@ -115,6 +120,7 @@ if [ "$DIFF" -gt 43200 ] || [ "$DIFF" -lt 1 ]
 then
 	LASTOPTIMIZE2=`date +%s`
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/optimise_db.php\007\003\n"
+	cd $NEWZNAB_PATH
 	[ -f $NEWZNAB_PATH/optimise_db.php ] && $PHP $NEWZNAB_PATH/optimise_db.php
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_tvschedule.php\007\003\n"
 	[ -f $NEWZNAB_PATH/update_tvschedule.php ] && $PHP $NEWZNAB_PATH/update_tvschedule.php

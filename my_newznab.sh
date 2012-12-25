@@ -101,7 +101,7 @@ then
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_parsing.php\007\003\n"
 	[ -f $NEWZNAB_PATH/update_parsing.php ] && $PHP $NEWZNAB_PATH/update_parsing.php
 	printf "\033]0; Loop $LOOP - Running $TESTING/getConsole.php\007\003\n"
-	[ -f $TESTING/getConsole.php ] && $PHP $NEWZNAB_PATH/getConsole.php
+	[ -f $TESTING/getConsole.php ] && $PHP $TESTING/getConsole.php
 	printf "\033]0; Loop $LOOP - Running $TESTING/getCovers.php\007\003\n"
 	[ -f $TESTING/getCovers.php ] && $PHP $TESTING/getCovers.php
 fi

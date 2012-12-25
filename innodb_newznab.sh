@@ -106,6 +106,7 @@ then
 	[ -f $NEWZNAB_PATH/update_theaters.php ] && $PHP $NEWZNAB_PATH/update_theaters.php
 fi
 
+printf "\033]0; End of Loop $LOOP\007\003\n"
 LOOP=$(( $LOOP + 1 ))
 echo "waiting $NEWZNAB_SLEEP_TIME seconds..."
 sleep $NEWZNAB_SLEEP_TIME

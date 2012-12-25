@@ -6,6 +6,7 @@
 set -e
 
 export NEWZNAB_PATH='/var/www/newznab/misc/update_scripts'
+export TESTING='/var/www/newznab/misc/test'
 export NEWZNAB_ADMIN_PATH='/var/www/newznab/www/admin'
 export NEWZNAB_SLEEP_TIME='10' # in seconds
 export NZBS='/path/to/nzbs'  #path to your nzb files
@@ -38,6 +39,8 @@ LOOP=1
 [ ! -f $NEWZNAB_PATH/optimise_db.php ] && echo $NEWZNAB_PATH/optimise_db.php not found && exit
 [ ! -f $NEWZNAB_PATH/update_tvschedule.php ] && echo $NEWZNAB_PATH/update_tvschedule.php not found && exit
 [ ! -f $NEWZNAB_PATH/update_theaters.php ] && echo $NEWZNAB_PATH/update_theaters.php not found && exit
+[ ! -f $TESTING/getConsole.php ] && echo $TESTING/getConsole.php not found && exit
+[ ! -f $TESTING/getCovers.php ] && echo $TESTING/getCovers.php not found && exit
 
 while :
 
@@ -97,6 +100,10 @@ then
 	[ -f $NEWZNAB_PATH/update_cleanup.php ] && $PHP $NEWZNAB_PATH/update_cleanup.php
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_parsing.php\007\003\n"
 	[ -f $NEWZNAB_PATH/update_parsing.php ] && $PHP $NEWZNAB_PATH/update_parsing.php
+	printf "\033]0; Loop $LOOP - Running $TESTING/getConsole.php\007\003\n"
+	[ -f $TESTING/getConsole.php ] && $PHP $NEWZNAB_PATH/getConsole.php
+	printf "\033]0; Loop $LOOP - Running $TESTING/getCovers.php\007\003\n"
+	[ -f $TESTING/getCovers.php ] && $PHP $TESTING/getCovers.php
 fi
 
 #increment backfill days

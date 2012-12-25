@@ -6,7 +6,7 @@
 set -e
 
 export NEWZNAB_PATH='/var/www/newznab/misc/update_scripts'
-export TESTING='/var/www/newznab/misc/test'
+export TESTING='/var/www/newznab/misc/testing'
 export NEWZNAB_ADMIN_PATH='/var/www/newznab/www/admin'
 export NEWZNAB_SLEEP_TIME='10' # in seconds
 export NZBS='/path/to/nzbs'  #path to your nzb files

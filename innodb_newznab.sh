@@ -3,6 +3,7 @@
 
 # call this script from within screen to get binaries, processes releases and 
 # every half day get tv/theatre info and optimise the database
+# every 2 hours run cleanup scripts
 
 set -e
 
@@ -116,5 +117,4 @@ echo "waiting $NEWZNAB_SLEEP_TIME seconds..."
 sleep $NEWZNAB_SLEEP_TIME
 
 done
-
 

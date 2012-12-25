@@ -29,6 +29,19 @@ COUNTER=0
 LOOP=1
 NZBCOUNT=`ls -1 ${NZBS} | wc -l`
 
+#check for files
+[ ! -f $NEWZNAB_PATH/update_releases.php ] && echo $NEWZNAB_PATH/update_releases.php not found && exit
+[ ! -f $INNODB_PATH/update_binaries.php ] && echo $INNODB_PATH/update_binaries.php not found && exit
+[ ! -f $INNODB_PATH/nzb-import.php ] && echo $INNODB_PATH/nzb-import.php not found && exit
+[ ! -f $INNODB_PATH/backfill.php ] && echo $INNODB_PATH/backfill.php not found && exit
+[ ! -f $NEWZNAB_PATH/update_predb.php ] && echo $NEWZNAB_PATH/update_predb.php not found && exit
+[ ! -f $NEWZNAB_PATH/removespecial.php ] && echo $NEWZNAB_PATH/removespecial.php not found && exit
+[ ! -f $NEWZNAB_PATH/update_cleanup.php ] && echo $NEWZNAB_PATH/update_cleanup.php not found && exit
+[ ! -f $NEWZNAB_PATH/update_parsing.php ] && echo $NEWZNAB_PATH/update_parsing.php not found && exit
+[ ! -f $NEWZNAB_PATH/optimise_db.php ] && echo $NEWZNAB_PATH/optimise_db.php not found && exit
+[ ! -f $NEWZNAB_PATH/update_tvschedule.php ] && echo $NEWZNAB_PATH/update_tvschedule.php not found && exit
+[ ! -f $NEWZNAB_PATH/update_theaters.php ] && echo $NEWZNAB_PATH/update_theaters.php not found && exit
+
 while :
 
  do

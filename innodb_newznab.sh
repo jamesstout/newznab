@@ -27,7 +27,6 @@ LASTOPTIMIZE1=`date +%s`
 LASTOPTIMIZE2=`date +%s`
 COUNTER=0
 LOOP=1
-NZBCOUNT=`ls -1 ${NZBS} | wc -l`
 
 #check for files
 [ ! -f $NEWZNAB_PATH/update_releases.php ] && echo $NEWZNAB_PATH/update_releases.php not found && exit
@@ -75,6 +74,7 @@ $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD3"
 
 #import nzb's
 cd $INNODB_PATH
+NZBCOUNT=`ls -1 ${NZBS} | wc -l`
 printf "\033]0; Loop $LOOP - Running $INNODB_PATH/nzb-import.php ${NZBS} true - $NZBCOUNT nzb's remaining\007\003\n"
 [ -f $INNODB_PATH/nzb-import.php ] && $PHP $INNODB_PATH/nzb-import.php ${NZBS} true
 cd $NEWZNAB_PATH

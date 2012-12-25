@@ -9,7 +9,7 @@ set -e
 
 export NEWZNAB_PATH='/var/www/newznab/misc/update_scripts'
 export INNODB_PATH='/var/www/newznab/misc/testing/innodb'
-export TESTING='/var/www/newznab/misc/test'
+export TESTING='/var/www/newznab/misc/testing'
 export NEWZNAB_SLEEP_TIME='10' # in seconds
 export NZBS='/path/to/nzbs'  #path to your nzb files
 export MyUSER='root' #mysql user

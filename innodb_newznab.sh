@@ -20,11 +20,13 @@ export PHP="$(which php5)"
 export MYSQL_CMD1="UPDATE groups set backfill_target=backfill_target+1 where active=1 and backfill_target<$MAXDAYS;"
 export MYSQL_CMD2="UPDATE site set value=$MAXRET where setting='rawretentiondays';"
 export MYSQL_CMD3="UPDATE site set value=0 where setting='rawretentiondays';"
+export MYSQL_CMD4="SELECT * from groups where active=1;"
 
 LASTOPTIMIZE1=`date +%s`
 LASTOPTIMIZE2=`date +%s`
 COUNTER=0
 LOOP=1
+NZBCOUNT=`ls -1 ${NZBS} | wc -l`
 
 while :
 
@@ -47,7 +49,8 @@ $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD2"
 
 #make active groups current
 cd $INNODB_PATH
-printf "\033]0; Loop $LOOP - Running $INNODB_PATH/update_binaries.php\007\003\n"
+GROUPCOUNT=`$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD4"`
+printf "\033]0; Loop $LOOP - Running $INNODB_PATH/update_binaries.php on $GROUPCOUNT groups\007\003\n"
 [ -f $INNODB_PATH/update_binaries.php ] && $PHP $INNODB_PATH/update_binaries.php
 cd $NEWZNAB_PATH
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n"
@@ -58,7 +61,7 @@ $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD3"
 
 #import nzb's
 cd $INNODB_PATH
-printf "\033]0; Loop $LOOP - Running $INNODB_PATH/nzb-import.php ${NZBS} true\007\003\n"
+printf "\033]0; Loop $LOOP - Running $INNODB_PATH/nzb-import.php ${NZBS} true - $NZBCOUNT nzb's remaining\007\003\n"
 [ -f $INNODB_PATH/nzb-import.php ] && $PHP $INNODB_PATH/nzb-import.php ${NZBS} true
 cd $NEWZNAB_PATH
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n"
@@ -66,7 +69,8 @@ printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n
 
 #get backfill for all active groups
 cd $INNODB_PATH
-printf "\033]0; Loop $LOOP - Running $PHP $INNODB_PATH/backfill.php\007\003\n"
+GROUPCOUNT=`$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD4"`
+printf "\033]0; Loop $LOOP - Running $PHP $INNODB_PATH/backfill.php on $GROUPCOUNT groups\007\003\n"
 [ -f $INNODB_PATH/backfill.php ] && $PHP $INNODB_PATH/backfill.php
 cd $NEWZNAB_PATH
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n"
@@ -112,4 +116,5 @@ echo "waiting $NEWZNAB_SLEEP_TIME seconds..."
 sleep $NEWZNAB_SLEEP_TIME
 
 done
+
 

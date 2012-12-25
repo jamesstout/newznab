@@ -36,7 +36,7 @@ $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD2"
 
 #make active groups current
 cd $INNODB_PATH
-[ -f $NEWZNAB_PATH/update_binaries.php ] && /usr/bin/php5 $NEWZNAB_PATH/update_binaries.php
+[ -f $INNODB_PATH/update_binaries.php ] && /usr/bin/php5 $INNODB_PATH/update_binaries.php
 cd $NEWZNAB_PATH
 [ -f $NEWZNAB_PATH/update_releases.php ] && /usr/bin/php5 $NEWZNAB_PATH/update_releases.php
 
@@ -45,13 +45,13 @@ $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD3"
 
 #import nzb's
 cd $INNODB_PATH
-[ -f $NEWZNAB_PATH/nzb-import.php ] && /usr/bin/php5 $NEWZNAB_PATH/nzb-import.php ${NZBS} true
+[ -f $INNODB_PATH/nzb-import.php ] && /usr/bin/php5 $INNODB_PATH/nzb-import.php ${NZBS} true
 cd $NEWZNAB_PATH
 [ -f $NEWZNAB_PATH/update_releases.php ] && /usr/bin/php5 $NEWZNAB_PATH/update_releases.php
 
 #get backfill for all active groups
 cd $INNODB_PATH
-[ -f $NEWZNAB_PATH/backfill.php ] && /usr/bin/php5 $NEWZNAB_PATH/backfill.php
+[ -f $INNODB_PATH/backfill.php ] && /usr/bin/php5 $INNODB_PATH/backfill.php
 cd $NEWZNAB_PATH
 [ -f $NEWZNAB_PATH/update_releases.php ] && /usr/bin/php5 $NEWZNAB_PATH/update_releases.php
 

@@ -88,7 +88,7 @@ printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n
 $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD2"
 
 DIFF=$(($CURRTIME-$LASTOPTIMIZE1))
-if [ "$DIFF" -gt 7200 ] || [ "$DIFF" -lt 1 ]
+if [ "$DIFF" -gt 3600 ] || [ "$DIFF" -lt 1 ]
 then
 	LASTOPTIMIZE1=`date +%s`
 	#run some cleanup scripts

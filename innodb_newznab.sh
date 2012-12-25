@@ -102,6 +102,7 @@ then
 	LASTOPTIMIZE1=`date +%s`
 	#run some cleanup scripts
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_predb.php true\007\003\n"
+	cd $NEWZNAB_PATH
 	[ -f $NEWZNAB_PATH/update_predb.php ] && $PHP $NEWZNAB_PATH/update_predb.php true
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/removespecial.php\007\003\n"
 	[ -f $NEWZNAB_PATH/removespecial.php ] && $PHP $NEWZNAB_PATH/removespecial.php
@@ -110,6 +111,7 @@ then
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_parsing.php\007\003\n"
 	[ -f $NEWZNAB_PATH/update_parsing.php ] && $PHP $NEWZNAB_PATH/update_parsing.php
 	printf "\033]0; Loop $LOOP - Running $TESTING/getConsole.php\007\003\n"
+	cd $TESTING
 	[ -f $TESTING/getConsole.php ] && $PHP $TESTING/getConsole.php
 	printf "\033]0; Loop $LOOP - Running $TESTING/getCovers.php\007\003\n"
 	[ -f $TESTING/getCovers.php ] && $PHP $TESTING/getCovers.php
@@ -124,6 +126,7 @@ if [ "$DIFF" -gt 43200 ] || [ "$DIFF" -lt 1 ]
 then
 	LASTOPTIMIZE2=`date +%s`
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/optimise_db.php\007\003\n"
+	cd $NEWZNAB_PATH
 	[ -f $NEWZNAB_PATH/optimise_db.php ] && $PHP $NEWZNAB_PATH/optimise_db.php
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_tvschedule.php\007\003\n"
 	[ -f $NEWZNAB_PATH/update_tvschedule.php ] && $PHP $NEWZNAB_PATH/update_tvschedule.php

@@ -35,9 +35,9 @@ LOOP=1
 [ ! -f $INNODB_PATH/nzb-import.php ] && echo $INNODB_PATH/nzb-import.php not found && exit
 [ ! -f $INNODB_PATH/backfill.php ] && echo $INNODB_PATH/backfill.php not found && exit
 [ ! -f $NEWZNAB_PATH/update_predb.php ] && echo $NEWZNAB_PATH/update_predb.php not found && exit
-[ ! -f $NEWZNAB_PATH/removespecial.php ] && echo $NEWZNAB_PATH/removespecial.php not found && exit
-[ ! -f $NEWZNAB_PATH/update_cleanup.php ] && echo $NEWZNAB_PATH/update_cleanup.php not found && exit
-[ ! -f $NEWZNAB_PATH/update_parsing.php ] && echo $NEWZNAB_PATH/update_parsing.php not found && exit
+[ ! -f $TESTING/removespecial.php ] && echo $TESTING/removespecial.php not found && exit
+[ ! -f $TESTING/update_cleanup.php ] && echo $TESTING/update_cleanup.php not found && exit
+[ ! -f $TESTING/update_parsing.php ] && echo $TESTING/update_parsing.php not found && exit
 [ ! -f $NEWZNAB_PATH/optimise_db.php ] && echo $NEWZNAB_PATH/optimise_db.php not found && exit
 [ ! -f $NEWZNAB_PATH/update_tvschedule.php ] && echo $NEWZNAB_PATH/update_tvschedule.php not found && exit
 [ ! -f $NEWZNAB_PATH/update_theaters.php ] && echo $NEWZNAB_PATH/update_theaters.php not found && exit
@@ -104,14 +104,14 @@ then
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_predb.php true\007\003\n"
 	cd $NEWZNAB_PATH
 	[ -f $NEWZNAB_PATH/update_predb.php ] && $PHP $NEWZNAB_PATH/update_predb.php true
-	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/removespecial.php\007\003\n"
-	[ -f $NEWZNAB_PATH/removespecial.php ] && $PHP $NEWZNAB_PATH/removespecial.php
-	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_cleanup.php\007\003\n"
-	[ -f $NEWZNAB_PATH/update_cleanup.php ] && $PHP $NEWZNAB_PATH/update_cleanup.php
-	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_parsing.php\007\003\n"
-	[ -f $NEWZNAB_PATH/update_parsing.php ] && $PHP $NEWZNAB_PATH/update_parsing.php
-	printf "\033]0; Loop $LOOP - Running $TESTING/getConsole.php\007\003\n"
 	cd $TESTING
+	printf "\033]0; Loop $LOOP - Running $TESTING/removespecial.php\007\003\n"
+	[ -f $TESTING/removespecial.php ] && $PHP $TESTING/removespecial.php
+	printf "\033]0; Loop $LOOP - Running $TESTING/update_cleanup.php\007\003\n"
+	[ -f $TESTING/update_cleanup.php ] && $PHP $TESTING/update_cleanup.php
+	printf "\033]0; Loop $LOOP - Running $TESTING/update_parsing.php\007\003\n"
+	[ -f $TESTING/update_parsing.php ] && $PHP $TESTING/update_parsing.php
+	printf "\033]0; Loop $LOOP - Running $TESTING/getConsole.php\007\003\n"
 	[ -f $TESTING/getConsole.php ] && $PHP $TESTING/getConsole.php
 	printf "\033]0; Loop $LOOP - Running $TESTING/getCovers.php\007\003\n"
 	[ -f $TESTING/getCovers.php ] && $PHP $TESTING/getCovers.php
@@ -127,7 +127,7 @@ then
 	LASTOPTIMIZE2=`date +%s`
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/optimise_db.php\007\003\n"
 	cd $NEWZNAB_PATH
-	[ -f $NEWZNAB_PATH/optimise_db.php ] && $PHP $NEWZNAB_PATH/optimise_db.php
+	[ -f $NEWZNAB_PATH/optimise_db.php ] && $PHP $NEWZNAB_PATH/optimise_db.php true
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_tvschedule.php\007\003\n"
 	[ -f $NEWZNAB_PATH/update_tvschedule.php ] && $PHP $NEWZNAB_PATH/update_tvschedule.php
 	printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_theaters.php\007\003\n"
@@ -140,4 +140,5 @@ echo "waiting $NEWZNAB_SLEEP_TIME seconds..."
 sleep $NEWZNAB_SLEEP_TIME
 
 done
+
 

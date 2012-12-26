@@ -47,8 +47,6 @@ LOOP=1
 [ ! -f $NEWZNAB_PATH/optimise_db.php ] && echo $NEWZNAB_PATH/optimise_db.php not found && exit
 [ ! -f $NEWZNAB_PATH/update_tvschedule.php ] && echo $NEWZNAB_PATH/update_tvschedule.php not found && exit
 [ ! -f $NEWZNAB_PATH/update_theaters.php ] && echo $NEWZNAB_PATH/update_theaters.php not found && exit
-[ ! -f $TESTING/getConsole.php ] && echo $TESTING/getConsole.php not found && exit
-[ ! -f $TESTING/getCovers.php ] && echo $TESTING/getCovers.php not found && exit
 
 while :
 
@@ -117,10 +115,6 @@ then
 	[ -f $TESTING/update_cleanup.php ] && $PHP $TESTING/update_cleanup.php
 	printf "\033]0; Loop $LOOP - Running $TESTING/update_parsing.php\007\003\n"
 	[ -f $TESTING/update_parsing.php ] && $PHP $TESTING/update_parsing.php
-	printf "\033]0; Loop $LOOP - Running $TESTING/getConsole.php\007\003\n"
-	[ -f $TESTING/getConsole.php ] && $PHP $TESTING/getConsole.php
-	printf "\033]0; Loop $LOOP - Running $TESTING/getCovers.php\007\003\n"
-	[ -f $TESTING/getCovers.php ] && $PHP $TESTING/getCovers.php
 fi
 
 #increment backfill days

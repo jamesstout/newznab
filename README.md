@@ -7,7 +7,7 @@ please msg me.
 **Newznab all in one Script**
 
 
-*IMPORTANT*
+**IMPORTANT**
 
 Be sure to edit the paths, the mysql username, password, database, retention and backfill days.
 

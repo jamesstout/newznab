@@ -6,7 +6,11 @@ please msg me.
 
 **Newznab all in one Script**
 
+
+*IMPORTANT*
 Be sure to edit the paths, the mysql username, password, database, retention and backfill days.
+
+Read the files in misc/testing and edit as needed. 'update_cleanup.php' will not do anything without editing the file first.
 
 Copy nzb-importmodified.php to www/admin/ and edit as needed.
 

@@ -8,6 +8,7 @@ please msg me.
 
 
 *IMPORTANT*
+
 Be sure to edit the paths, the mysql username, password, database, retention and backfill days.
 
 Read the files in misc/testing and edit as needed. 'update_cleanup.php' will not do anything without editing the file first.
@@ -16,7 +17,10 @@ Copy nzb-importmodified.php to www/admin/ and edit as needed.
 
 Enter the details for nzpre and set you retention days.
 
-You can run this in screen or from cron.
+You can run these in screen or from cron.
+innodb_newznab.sh         --> InnoDB tables
+my_newznab.sh             --> Threaded downloading using MyIsam tables
+my_newznab_no_threads.sh  --> Non Threaded downloading using MyIsam tables
 
 
 What this script does:

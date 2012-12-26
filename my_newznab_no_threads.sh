@@ -26,8 +26,6 @@ export MAXRET='2'  #max days for backfill
 export MYSQL="$(which mysql)"
 export PHP="$(which php5)"
 export MYSQL_CMD1="UPDATE groups set backfill_target=backfill_target+1 where active=1 and backfill_target<$MAXDAYS;"
-export MYSQL_CMD2="UPDATE site set value=$MAXRET where setting='rawretentiondays';"
-export MYSQL_CMD3="UPDATE site set value=0 where setting='rawretentiondays';"
 export MYSQL_CMD4="SELECT * from groups where active=1;"
 
 LASTOPTIMIZE1=`date +%s`
@@ -63,9 +61,6 @@ do
 	COUNTER=$(( $COUNTER + 1 ))
 done
 
-#set retention days
-$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD2"
-
 #make active groups current
 GROUPCOUNT=`$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD4"`
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_binaries.php on $GROUPCOUNT groups\007\003\n"
@@ -73,9 +68,6 @@ cd $NEWZNAB_PATH
 [ -f $NEWZNAB_PATH/update_binaries.php ] && $PHP $NEWZNAB_PATH/update_binaries.php
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n"
 [ -f $NEWZNAB_PATH/update_releases.php ] && $PHP $NEWZNAB_PATH/update_releases.php
-
-#set retention days to 0
-$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD3"
 
 #import nzb's
 NZBCOUNT=`ls -1 ${NZBS} | wc -l`
@@ -92,9 +84,6 @@ printf "\033]0; Loop $LOOP - Running $PHP $NEWZNAB_PATH/backfill.php on $GROUPCO
 [ -f $NEWZNAB_PATH/backfill.php ] && $PHP $NEWZNAB_PATH/backfill.php
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n"
 [ -f $NEWZNAB_PATH/update_releases.php ] && $PHP $NEWZNAB_PATH/update_releases.php
-
-#reset retention days
-$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD2"
 
 DIFF=$(($CURRTIME-$LASTOPTIMIZE1))
 if [ "$DIFF" -gt 3600 ] || [ "$DIFF" -lt 1 ]

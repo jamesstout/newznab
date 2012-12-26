@@ -1,3 +1,6 @@
+These scripts are constantly changing (still learning). If something doesn't work as expected 
+/msg jonnyboy on irc. Tell me what is broken and I'll check and fix if necessary.
+
 **Newznab all in one Script**
 
 Be sure to edit the paths, the mysql username, password, database, retention and backfill days.

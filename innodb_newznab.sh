@@ -5,6 +5,12 @@
 # every half day get tv/theatre info and optimise the database
 # every 2 hours run cleanup scripts
 
+# These scripts are constantly changing (still learning). If something doesn't work as expected /msg jonnyboy on irc.
+# Tell me what is broken and I'll check and fix if necessary.
+# I have include my innodb my.cnf, if you see something that is out of whack or may be better configured, please msg me.
+
+# If you don't need something to run, just comment it out. The lines that start '[ ! -f' are the ones to comment, ie. '#[ ! -f'
+
 set -e
 
 export NEWZNAB_PATH='/var/www/newznab/misc/update_scripts'

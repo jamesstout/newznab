@@ -4,12 +4,6 @@ Be sure to edit the paths, the mysql username, password, database, retention and
 
 Copy nzb-importmodified.php to www/admin/ and edit as needed.
 
-Copy update_parsing.php to misc/update_scripts/ and edit as needed.
-
-Copy update_cleanup.php to misc/update_scripts/ and edit as needed.
-
-Copy removespecial.php to misc/update_scripts/ and edit as needed.
-
 Enter the details for nzpre and set you retention days.
 
 You can run this in screen or from cron.

@@ -25,8 +25,9 @@ export MAXDAYS='180'  #max days for backfill
 export MAXRET='2'  #max days for backfill
 export MYSQL="$(which mysql)"
 export PHP="$(which php5)"
+export SCREEN="$(which screen)"
 export MYSQL_CMD1="UPDATE groups set backfill_target=backfill_target+1 where active=1 and backfill_target<$MAXDAYS;"
-export MYSQL_CMD4="SELECT * from groups where active=1;"
+export MYSQL_CMD4="SELECT COUNT(*) from groups where active=1;"
 
 LASTOPTIMIZE1=`date +%s`
 LASTOPTIMIZE2=`date +%s`
@@ -61,8 +62,13 @@ do
 	COUNTER=$(( $COUNTER + 1 ))
 done
 
+#start justpostprocessing.php, if exists and runs in screen
+if ! $SCREEN -list | grep -q "POSTP"; then
+        [ -f $NEWZNAB_PATH/justpostprocessing.php ] && cd $NEWZNAB_PATH && $SCREEN -dmS POSTP $PHP $NEWZNAB_PATH/justpostprocessing.php
+fi
+
 #make active groups current
-GROUPCOUNT=`$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD4"`
+GROUPCOUNT=`$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD4" | grep -o [0-9]*`
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_binaries.php on $GROUPCOUNT groups\007\003\n"
 cd $NEWZNAB_PATH
 [ -f $NEWZNAB_PATH/update_binaries.php ] && $PHP $NEWZNAB_PATH/update_binaries.php
@@ -79,7 +85,7 @@ cd $NEWZNAB_PATH
 [ -f $NEWZNAB_PATH/update_releases.php ] && $PHP $NEWZNAB_PATH/update_releases.php
 
 #get backfill for all active groups
-GROUPCOUNT=`$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD4"`
+GROUPCOUNT=`$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "$MYSQL_CMD4" | grep -o [0-9]*`
 printf "\033]0; Loop $LOOP - Running $PHP $NEWZNAB_PATH/backfill.php on $GROUPCOUNT groups\007\003\n"
 [ -f $NEWZNAB_PATH/backfill.php ] && $PHP $NEWZNAB_PATH/backfill.php
 printf "\033]0; Loop $LOOP - Running $NEWZNAB_PATH/update_releases.php\007\003\n"

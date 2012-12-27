@@ -22,13 +22,6 @@ innodb_newznab.sh         --> InnoDB tables
 my_newznab.sh             --> Threaded downloading using MyIsam tables
 my_newznab_no_threads.sh  --> Non Threaded downloading using MyIsam tables
 
-If you use the innodb script, then in the file newznab/misc/testing/innodb/lib/innodb/binaries.php, change
-require_once("backfill.php");
-to
-//require_once("backfill.php");
-or else backfill will run before update_binaries. So, in my script it would run twice per loop.
-
-
 What this script does:
 
 1.  Set retention=what you set.

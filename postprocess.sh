@@ -17,4 +17,4 @@ $WGET -N -O $NEWZPATH/misc/update_scripts/justpostprocessing.php https://dl.drop
 #$SED -i -e 's/$numtoProcess = 100;/$numtoProcess = 1;/g' $NEWZPATH/www/lib/postprocess.php
 #$SED -i -e 's/$postprocess = new PostProcess(true);/\/\/$postprocess = new PostProcess(true);/' $NEWZPATH/www/lib/releases.php
 #$SED -i -e 's/$postprocess->processAll();/\/\/$postprocess->processAll();/' $NEWZPATH/www/lib/releases.php
-$SED -i -e 's/$postprocess->processAdditional();/\/\/$postprocess->processAdditional();/' $NEWZPATH/www/lib/releases.php
+$SED -i -e 's/$this->processAdditional();/\/\/$this->processAdditional();/' $NEWZPATH/www/lib/postprocess.php

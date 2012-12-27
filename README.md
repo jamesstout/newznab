@@ -30,6 +30,7 @@ This will make his scripts available and able to be run.
 What my_newznab.sh does (the others do similar):
 
 Each loop:
+
 1.  run `update_releases.php` to cleanup from previous runs
 2.  run `justpostprocessing.php` in screen, this does all of the postprocessing if you have run postprocess.sh.
 3.  run `update_binaries_threaded.php` to pull binaries for all active groups.
@@ -39,14 +40,17 @@ Each loop:
 7.  run `backfill_threaded.php` to pull backfills upto current backfill.
 8.  run `update_releases.php` to create releases form binaries.
 Every 2 hours, postprocessing cleanup:
+
 9.  run `update_predb.php`
 10. run `update_parsing.php`
 11. run `removespecial.php`
 12. run `update_cleanup.php`
 Every 12 hours:
+
 13. run `optimise_db.php`
 14. run `update_tvschedule.php`
 15. run `update_theaters.php`
 At end of loop:
+
 16. Increment the backfill for all active groups by 1 up to the MAXDAYS set.
 17. Wash and repeat.

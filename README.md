@@ -24,8 +24,11 @@ my_newznab.sh             --> Threaded downloading using MyIsam tables
 
 my_newznab_no_threads.sh  --> Non Threaded downloading using MyIsam tables
 
-
 Run postprocess.sh, as root, to create a new file to remove postprocessing to it's own process. this will significantly decrease time per loop.
+
+To use the innodb script, you will need to clone the repo https://github.com/itandrew/Newznab-InnoDB-Dropin.git into misc/testing/
+
+This will make his scripts available and able to be run.
 
 What this script does:
 

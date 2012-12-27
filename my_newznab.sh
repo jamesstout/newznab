@@ -1,4 +1,5 @@
 #!/bin/sh
+
 # call this script from within screen to get binaries, processes releases and 
 # every half day get tv/theatre info and optimise the database
 # every 2 hours run cleanup scripts

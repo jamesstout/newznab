@@ -11,9 +11,10 @@
 # Set these variables - case significant
 NEWZPATH=/var/www/newznab
 WGET=`which wget`
-#SED=`which sed`
+SED=`which sed`
 
 $WGET -N -O $NEWZPATH/misc/update_scripts/justpostprocessing.php https://dl.dropbox.com/u/8760087/justpostprocessing.php
 #$SED -i -e 's/$numtoProcess = 100;/$numtoProcess = 1;/g' $NEWZPATH/www/lib/postprocess.php
 #$SED -i -e 's/$postprocess = new PostProcess(true);/\/\/$postprocess = new PostProcess(true);/' $NEWZPATH/www/lib/releases.php
 #$SED -i -e 's/$postprocess->processAll();/\/\/$postprocess->processAll();/' $NEWZPATH/www/lib/releases.php
+$SED -i -e 's/$postprocess->processAdditional();/\/\/$postprocess->processAdditional();/' $NEWZPATH/www/lib/releases.php

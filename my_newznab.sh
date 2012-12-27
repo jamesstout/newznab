@@ -22,7 +22,6 @@ export MyUSER='root' #mysql user
 export MyPASS='password' #mysql password
 export DATABASE='newznab'
 export MAXDAYS='180'  #max days for backfill
-export MAXRET='2'  #max days for backfill
 export MYSQL="$(which mysql)"
 export PHP="$(which php5)"
 export SCREEN="$(which screen)"

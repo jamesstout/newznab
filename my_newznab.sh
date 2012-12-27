@@ -99,12 +99,12 @@ then
 	cd $NEWZNAB_PATH
 	[ -f $NEWZNAB_PATH/update_predb.php ] && $PHP $NEWZNAB_PATH/update_predb.php true
 	cd $TESTING
+	printf "\033]0; Loop $LOOP - Running $TESTING/update_parsing.php\007\003\n"
+	[ -f $TESTING/update_parsing.php ] && $PHP $TESTING/update_parsing.php
 	printf "\033]0; Loop $LOOP - Running $TESTING/removespecial.php\007\003\n"
 	[ -f $TESTING/removespecial.php ] && $PHP $TESTING/removespecial.php
 	printf "\033]0; Loop $LOOP - Running $TESTING/update_cleanup.php\007\003\n"
 	[ -f $TESTING/update_cleanup.php ] && $PHP $TESTING/update_cleanup.php
-	printf "\033]0; Loop $LOOP - Running $TESTING/update_parsing.php\007\003\n"
-	[ -f $TESTING/update_parsing.php ] && $PHP $TESTING/update_parsing.php
 fi
 
 #increment backfill days

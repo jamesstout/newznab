@@ -5,7 +5,8 @@
 # it will download justpostprocessing.php and place it in the correct location
 # this will remove the post processing to it's own loop
 # and will signaificantly decrease time per loop using my scrips
-
+# original idea from https://sites.google.com/site/1204nnplus/optional-configurations
+# and http://pastebin.com/rP9nUhz8
 
 # Set these variables - case significant
 NEWZPATH=/var/www/newznab

@@ -1,5 +1,5 @@
-****WORK IN PROGRESS****
-***Don't blame me if your have to start over!***
+#****WORK IN PROGRESS****#
+##***Don't blame me if your have to start over!***##
 
 These scripts are constantly changing (still learning). If something doesn't work as expected 
 /msg jonnyboy on irc. Tell me what is broken and I'll check and fix if necessary.

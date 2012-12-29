@@ -12,9 +12,6 @@ NEWZPATH=/var/www/newznab
 WGET=`which wget`
 SED=`which sed`
 
-#$WGET -N $NEWZPATH/misc/update_scripts/justpostprocessing.php https://dl.dropbox.com/u/8760087/justpostprocessing.php
-#$WGET -N $NEWZPATH/misc/update_scripts/postprocessing.php https://dl.dropbox.com/u/8760087/postprocessing.php
-#$WGET -N $NEWZPATH/misc/update_scripts/postprocess_nfo.php https://dl.dropbox.com/u/8760087/postprocess_nfo.php
 cp justpostprocessing.php $NEWZPATH/misc/update_scripts/
 cp postprocessing.php $NEWZPATH/misc/update_scripts/
 cp postprocess_nfo.php $NEWZPATH/misc/update_scripts/

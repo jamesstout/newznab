@@ -14,6 +14,7 @@ SED=`which sed`
 cp justpostprocessing.php $NEWZPATH/misc/update_scripts/
 cp postprocessing.php $NEWZPATH/misc/update_scripts/
 cp postprocess_nfo.php $NEWZPATH/misc/update_scripts/
+[ -f ~/.tmux.conf ] && mv .tmux.conf .tmux.conf.orig
 cp tmux.conf ~/.tmux.conf
 $SED -i -e 's/$this->processAdditional();/\/\/$this->>processAdditional();/' $NEWZPATH/www/lib/postprocess.php
 $SED -i -e 's/$this->processNfos();/\/\/$this->processNfos();/' $NEWZPATH/www/lib/postprocess.php

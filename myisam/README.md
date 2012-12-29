@@ -6,7 +6,7 @@
 
     `git clone https://github.com/jonnyboy/newznab.git`
     
-    `cd newznab/innodb`
+    `cd newznab/myisam`
     
     `nano setup.sh`
 

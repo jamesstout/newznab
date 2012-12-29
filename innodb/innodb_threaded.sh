@@ -69,7 +69,7 @@ export MYSQL_CMD="UPDATE groups set backfill_target=backfill_target+1 where acti
 
 $TMUX new-session -d -s NewzNab -n NewzNab 'cd $NEWZNAB_PATH && echo "processNfos Working......" && sleep 30 && $PHP $NEWZNAB_PATH/postprocess_nfo.php'
 $TMUX selectp -t 0
-$TMUX splitw -v -p 75 'echo "import-nzb Working......" && sleep 45 && ./my_import.sh'
+$TMUX splitw -v -p 75 'echo "import's Working......" && sleep 45 && ./my_import.sh'
 $TMUX selectp -t 0
 $TMUX splitw -h -p 66 'cd $NEWZNAB_PATH && echo "processAdditional Working......" && sleep 35 && $PHP $NEWZNAB_PATH/justpostprocessing.php'
 $TMUX splitw -h -p 50 'cd $NEWZNAB_PATH && echo "postProcessing Working......" && sleep 40 && $PHP $NEWZNAB_PATH/postprocessing.php'

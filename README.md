@@ -1,5 +1,5 @@
 # Newznab all in one Scripts
-#          Threaded
+Threaded
 
 There are 2 sets of scripts. If, you have or want InnoDB tables, then you should use the scripts in the innodb folder. Otherwise, use the scripts in the myisam folder.
 

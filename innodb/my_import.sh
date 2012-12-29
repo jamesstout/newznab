@@ -32,9 +32,9 @@ set -e
 
 export INNODB_PATH='/var/www/newznab/misc/testing/innodb'
 export NEWZNAB_SLEEP_TIME='10' # in seconds
-export NZBS='/home/jonnyboy/nzbs/batch'  #path to your nzb files to be imported
+export NZBS='/path/to/nzbs'  #path to your nzb files to be imported
 export MyUSER='root' #mysql user
-export MyPASS='Criss24Cross' #mysql password
+export MyPASS='password' #mysql password
 export DATABASE='newznab'
 export MAXDAYS='200'  #max days for backfill
 export MYSQL="$(which mysql)"

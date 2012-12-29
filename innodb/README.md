@@ -1,5 +1,9 @@
 # SETUP
 
+ * Please backup your database first. Something like this should do it.
+
+    `mysqldump --opt -u root -p newznab > ~/newznab_backup.sql`
+
  * This first step will modify your setup using [andrewit's github](https://github.com/itandrew/Newznab-InnoDB-Dropin.git)
  * convert database to innodb, edit path if necessary
 

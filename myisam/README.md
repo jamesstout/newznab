@@ -1,5 +1,9 @@
 # SETUP
 
+ * Please backup your database first. Something like this should do it.
+
+    `mysqldump --opt -u root -p newznab > ~/newznab_backup.sql`
+
  * Create a folder.
  * Move to that folder.
  * Clone my github

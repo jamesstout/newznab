@@ -12,9 +12,9 @@ NEWZPATH=/var/www/newznab
 WGET=`which wget`
 SED=`which sed`
 
-$WGET -N -O $NEWZPATH/misc/update_scripts/justpostprocessing.php https://dl.dropbox.com/u/8760087/justpostprocessing.php
-$WGET -N -O $NEWZPATH/misc/update_scripts/postprocessing.php https://dl.dropbox.com/u/8760087/postprocessing.php
-$WGET -N -O $NEWZPATH/misc/update_scripts/postprocess_nfo.php https://dl.dropbox.com/u/8760087/postprocess_nfo.php
+$WGET -N $NEWZPATH/misc/update_scripts/justpostprocessing.php https://dl.dropbox.com/u/8760087/justpostprocessing.php
+$WGET -N $NEWZPATH/misc/update_scripts/postprocessing.php https://dl.dropbox.com/u/8760087/postprocessing.php
+$WGET -N $NEWZPATH/misc/update_scripts/postprocess_nfo.php https://dl.dropbox.com/u/8760087/postprocess_nfo.php
 $SED -i -e 's/$this->processAdditional();/\/\/$this->>processAdditional();/' $NEWZPATH/www/lib/postprocess.php
 $SED -i -e 's/$this->processNfos();/\/\/$this->processNfos();/' $NEWZPATH/www/lib/postprocess.php
 $SED -i -e 's/$this->processUnwanted();/\/\/$this->processUnwanted();/' $NEWZPATH/www/lib/postprocess.php

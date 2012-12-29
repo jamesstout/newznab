@@ -49,13 +49,13 @@ while :
  do
 CURRTIME=`date +%s`
 
+#import nzb's
+cd $INNODB_PATH
+[ -f $INNODB_PATH/nzb-import.php ] && $PHP $INNODB_PATH/nzb-import.php ${NZBS} true
+
 #make active groups current
 cd $NEWZNAB_PATH
 [ -f $NEWZNAB_PATH/update_binaries_threaded.php ] && $PHP $NEWZNAB_PATH/update_binaries_threaded.php
-
-#import nzb's
-cd $INNODB_PATH
-[ -f $INNODB_PATH/nzb-import.php ] && $PHP $INNODB_PATH/nzb-import.php ${NZBS} true &
 
 #get backfill for all active groups
 cd $NEWZNAB_PATH

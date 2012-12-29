@@ -1,4 +1,3 @@
-
 #!/bin/sh
 ##******************ONLY IF YOU HAVE CONVERTED YOUR TABLE TO InnoDB**********************
 ##**********************WARNING - YOU MAY NOT LIKE THE RESULTS***************************
@@ -75,7 +74,7 @@ fi
 
 CURRTIME=`date +%s`
 #every 12 hours and during 1st loop
-DIFF=$(($CURRTIME-$LASTOPTIMIZE2))
+DIFF=$(($CURRTIME-$LASTOPTIMIZE3))
 if [ "$DIFF" -gt 43200 ] || [ "$DIFF" -lt 1 ]
 then
         LASTOPTIMIZE3=`date +%s`

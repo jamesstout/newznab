@@ -4,11 +4,13 @@
  * Create a folder.
  * Move to that folder.
  * Clone my github
-
+    //
     git clone https://github.com/jonnyboy/newznab.git
     
     cd newznab
+    
     nano innodb-setup.sh
+    //
 
  * Edit the root of the path to you Newznab installation.
  * Save and exit.

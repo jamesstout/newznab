@@ -41,3 +41,5 @@
     `./newznab_threaded.sh`
     
  * If you connect using putty, then under Window/Translation set Remote character set to UTF-8.
+
+ * If something looks stalled, it probably isn't. If all 5 panes are still there, it is most likely, as it should be.

@@ -66,7 +66,7 @@ if [ "$DIFF" -gt 43200 ] || [ "$DIFF" -lt 1 ]
 then
         LASTOPTIMIZE2=`date +%s`
         cd $NEWZNAB_PATH
-        [ -f $NEWZNAB_PATH/optimise_db.php ] && $PHP $NEWZNAB_PATH/optimise_db.php true
+        [ -f $NEWZNAB_PATH/optimise_db.php ] && $PHP $NEWZNAB_PATH/optimise_db.php
         [ -f $NEWZNAB_PATH/update_tvschedule.php ] && $PHP $NEWZNAB_PATH/update_tvschedule.php
         [ -f $NEWZNAB_PATH/update_theaters.php ] && $PHP $NEWZNAB_PATH/update_theaters.php
 fi

@@ -44,11 +44,10 @@ export MYSQL_CMD="UPDATE groups set backfill_target=backfill_target+1 where acti
 while :
 
  do
-CURRTIME=`date +%s`
 
 #import nzb's
 cd $NEWZNAB_PATH
-[ -f $NEWZNAB_ADMIN_PATH/nzb-importmodified.php ] && $PHP $NEWZNAB_ADMIN_PATH/nzb-importmodified.php ${NZBS} true
+[ -f $NEWZNAB_ADMIN_PATH/nzb-importmodified.php ] && $PHP $NEWZNAB_ADMIN_PATH/nzb-importmodified.php ${NZBS}
 
 #make active groups current
 [ -f $NEWZNAB_PATH/update_binaries_threaded.php ] && $PHP $NEWZNAB_PATH/update_binaries_threaded.php

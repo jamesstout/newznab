@@ -14,8 +14,7 @@ SED=`which sed`
 cp justpostprocessing.php $NEWZPATH/misc/update_scripts/
 cp postprocessing.php $NEWZPATH/misc/update_scripts/
 cp postprocess_nfo.php $NEWZPATH/misc/update_scripts/
-[ -f ~/.tmux.conf ] && mv .tmux.conf .tmux.conf.orig
-cp tmux.conf ~/.tmux.conf
+
 $SED -i -e 's/$this->processAdditional();/\/\/$this->>processAdditional();/' $NEWZPATH/www/lib/postprocess.php
 $SED -i -e 's/$this->processNfos();/\/\/$this->processNfos();/' $NEWZPATH/www/lib/postprocess.php
 $SED -i -e 's/$this->processUnwanted();/\/\/$this->processUnwanted();/' $NEWZPATH/www/lib/postprocess.php
@@ -27,4 +26,8 @@ $SED -i -e 's/$this->processTv();/\/\/$this->processTv();/' $NEWZPATH/www/lib/po
 $SED -i -e 's/$this->processMusicFromMediaInfo();/\/\/$this->processMusicFromMediaInfo();/' $NEWZPATH/www/lib/postprocess.php
 $SED -i -e 's/$this->processOtherMiscCategory();/\/\/$this->processOtherMiscCategory();/' $NEWZPATH/www/lib/postprocess.php
 $SED -i -e 's/$this->processUnknownCategory();/\/\/$this->processUnknownCategory();/' $NEWZPATH/www/lib/postprocess.php
+
+echo "as your normal user run"
+echo "[ -f ~/.tmux.conf ] && mv ~/.tmux.conf ~/.tmux.conf.orig"
+echo "cp tmux.conf ~/.tmux.conf"
 

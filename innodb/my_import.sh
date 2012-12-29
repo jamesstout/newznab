@@ -44,27 +44,29 @@ export MYSQL_CMD="UPDATE groups set backfill_target=backfill_target+1 where acti
 
 ##END OF EDITS##
 
+
 while :
-
  do
-CURRTIME=`date +%s`
 
-#import nzb's
-cd $INNODB_PATH
-[ -f $INNODB_PATH/nzb-import.php ] && $PHP $INNODB_PATH/nzb-import.php ${NZBS} true
+    #import nzb's
+    cd $INNODB_PATH
+    [ -f $INNODB_PATH/nzb-import.php ] && $PHP $INNODB_PATH/nzb-import.php ${NZBS} &
 
-#make active groups current
-cd $NEWZNAB_PATH
-[ -f $NEWZNAB_PATH/update_binaries_threaded.php ] && $PHP $NEWZNAB_PATH/update_binaries_threaded.php
+    #make active groups current
+    cd $NEWZNAB_PATH
+    [ -f $NEWZNAB_PATH/update_binaries_threaded.php ] && $PHP $NEWZNAB_PATH/update_binaries_threaded.php &
 
-#get backfill for all active groups
-cd $NEWZNAB_PATH
-[ -f $NEWZNAB_PATH/backfill_threaded.php ] && $PHP $NEWZNAB_PATH/backfill_threaded.php
+    #get backfill for all active groups
+    cd $NEWZNAB_PATH
+    [ -f $NEWZNAB_PATH/backfill_threaded.php ] && $PHP $NEWZNAB_PATH/backfill_threaded.php &
 
-#increment backfill days
-$MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "${MYSQL_CMD}"
+    wait
 
-echo "waiting $NEWZNAB_SLEEP_TIME seconds..."
-sleep $NEWZNAB_SLEEP_TIME
+    #increment backfill days
+    $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "${MYSQL_CMD}"
+
+    echo "imports waiting $NEWZNAB_SLEEP_TIME seconds..."
+    sleep $NEWZNAB_SLEEP_TIME
 
 done
+

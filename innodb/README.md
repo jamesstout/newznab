@@ -35,8 +35,7 @@
     innodb-setup.sh
 
  * Run my script.
-
-    innodb_threaded.sh
+    innodb_threaded.sh 
     
     
 ### If you do not have a tmux.conf file in your home folder, you can use mine.

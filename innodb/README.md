@@ -2,7 +2,7 @@
 
  * This assumes that you have already setup your install using [andrewit's github](https://github.com/itandrew/Newznab-InnoDB-Dropin.git) If not, please do that first.
  * convert database to innodb
-     * create a folder and move to it`
+     * create a folder and move to it
     
         `wget -N https://dl.dropbox.com/u/8760087/innodb.sh`
     

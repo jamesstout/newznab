@@ -2,9 +2,10 @@
 
  * This assumes that you have already setup your install using [andrewit's github](https://github.com/itandrew/Newznab-InnoDB-Dropin.git) If not, please do that first.
  * convert database to innodb
-     * create a folder and move to it
-    
 
+    'cd /path/to/your/newznab/misc/testing/'
+    'git clone git://github.com/itandrew/Newznab-InnoDB-Dropin.git innodb'
+        
 
  * Create a folder.
  * Move to that folder.

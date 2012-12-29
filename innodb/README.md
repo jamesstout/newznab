@@ -4,11 +4,7 @@
  * convert database to innodb
      * create a folder and move to it
     
-        `wget -N https://dl.dropbox.com/u/8760087/innodb.sh`
-    
-        `chmod +x innodb.sh`
-    
-        `./innodb.sh`
+
 
  * Create a folder.
  * Move to that folder.

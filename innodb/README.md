@@ -3,6 +3,8 @@
  * This first step will setup your install using [andrewit's github](https://github.com/itandrew/Newznab-InnoDB-Dropin.git) If you have already done that, skip this step.
  * convert database to innodb
 
+    `cd /path/to/your/newznab/misc/testing/`
+    'git clone git://github.com/itandrew/Newznab-InnoDB-Dropin.git innodb`
 
  * Create a folder.
  * Move to that folder.
@@ -13,7 +15,6 @@
     `cd newznab/innodb`
     
     `nano innodb_setup.sh`
-
 
  * Edit the root of the path to you Newznab installation.
  * Save and exit.

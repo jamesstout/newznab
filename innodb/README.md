@@ -45,10 +45,4 @@
 
     `./innodb_threaded.sh`
     
- * If you do not have a tmux.conf file in your home folder, you can use mine. Run this as the user you will run the script with.
-
-    `wget -N ~/tmux.conf https://dl.dropbox.com/u/8760087/tmux.conf`
-    
-    `mv ~/tmux.conf ~/.tmux.conf`
-    
  * If you connect using putty, then under Window/Translation set Remote character set to UTF-8.

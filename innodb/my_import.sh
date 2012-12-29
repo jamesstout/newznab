@@ -51,15 +51,15 @@ CURRTIME=`date +%s`
 
 #make active groups current
 cd $NEWZNAB_PATH
-[ -f $NEWZNAB_PATH/update_binaries_threaded.php ] && $PHP $NEWZNAB_PATH/update_binaries_threaded.php
+[ -f $NEWZNAB_PATH/update_binaries_threaded.php ] && $PHP $NEWZNAB_PATH/update_binaries_threaded.php &
 
 #import nzb's
 cd $INNODB_PATH
-[ -f $INNODB_PATH/nzb-import.php ] && $PHP $INNODB_PATH/nzb-import.php ${NZBS} true
+[ -f $INNODB_PATH/nzb-import.php ] && $PHP $INNODB_PATH/nzb-import.php ${NZBS} true &
 
 #get backfill for all active groups
 cd $NEWZNAB_PATH
-[ -f $NEWZNAB_PATH/backfill_threaded.php ] && $PHP $NEWZNAB_PATH/backfill_threaded.php
+[ -f $NEWZNAB_PATH/backfill_threaded.php ] && $PHP $NEWZNAB_PATH/backfill_threaded.php &
 
 #increment backfill days
 $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "${MYSQL_CMD}"

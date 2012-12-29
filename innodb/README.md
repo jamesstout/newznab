@@ -39,7 +39,7 @@
 
  * Run my setup script to make a few edits and download 3 new files.
 
-    `./innodb-setup.sh`
+    `./innodb_setup.sh`
 
  * Run my script.
 

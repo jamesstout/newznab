@@ -7,7 +7,7 @@
 
     git clone https://github.com/jonnyboy/newznab.git
     
-    cd newznab
+    cd newznab/innodb
     
     nano innodb-setup.sh
 

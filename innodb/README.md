@@ -6,6 +6,8 @@
     `cd /var/www/newznab/misc/testing/`
     
     `git clone git://github.com/itandrew/Newznab-InnoDB-Dropin.git innodb`
+    
+    `php5 innodb/lib/innodb/convertToInnoDB.php`
 
  * Create a folder.
  * Move to that folder.

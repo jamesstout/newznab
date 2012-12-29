@@ -31,7 +31,7 @@ set -e
 ##EDIT AS NECESSARY##
 
 export INNODB_PATH='/var/www/newznab/misc/testing/innodb'
-export TESTING='/var/www/newznab/misc/testing'
+export NEWZNAB_PATH='/var/www/newznab/misc/update_scripts'
 export NEWZNAB_SLEEP_TIME='10' # in seconds
 export NZBS='/path/to/nzbs'  #path to your nzb files to be imported
 export MyUSER='root' #mysql user
@@ -50,16 +50,16 @@ while :
 CURRTIME=`date +%s`
 
 #make active groups current
-cd $TESTING
-[ -f $TESING/update_binaries_threaded.php ] && $PHP $TESING/update_binaries_threaded.php
+cd $NEWZNAB_PATH
+[ -f $NEWZNAB_PATH/update_binaries_threaded.php ] && $PHP $NEWZNAB_PATH/update_binaries_threaded.php
 
 #import nzb's
-cd $TESTING
+cd $INNODB_PATH
 [ -f $INNODB_PATH/nzb-import.php ] && $PHP $INNODB_PATH/nzb-import.php ${NZBS} true
 
 #get backfill for all active groups
-cd $TESTING
-[ -f $TESTING/backfill_threaded.php ] && $PHP $TESTING/backfill_threaded.php
+cd $NEWZNAB_PATH
+[ -f $NEWZNAB_PATH/backfill_threaded.php ] && $PHP $NEWZNAB_PATH/backfill_threaded.php
 
 #increment backfill days
 $MYSQL -u$MyUSER --password=$MyPASS $DATABASE -e "${MYSQL_CMD}"

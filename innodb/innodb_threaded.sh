@@ -52,9 +52,9 @@ export MYSQL_CMD="UPDATE groups set backfill_target=backfill_target+1 where acti
 [ ! -f $NEWZNAB_PATH/justpostprocessing.php ] && echo $NEWZNAB_PATH/justpostprocessing.php not found && exit
 [ ! -f $NEWZNAB_PATH/postprocess_nfo.php ] && echo $NEWZNAB_PATH/postprocess_nfo.php not found && exit
 [ ! -f $NEWZNAB_PATH/postprocessing.php ] && echo $NEWZNAB_PATH/postprocessing.php not found && exit
-[ ! -f $INNODB_PATH/update_binaries.php ] && echo $INNODB_PATH/update_binaries.php not found && exit
+[ ! -f $NEWZNAB_PATH/update_binaries_threaded.php ] && echo $NEWZNAB_PATH/update_binaries_threaded.php not found && exit
+[ ! -f $NEWZNAB_PATH/backfill_threaded.php ] && echo $NEWZNAB_PATH/backfill_threaded.php not found && exit
 [ ! -f $INNODB_PATH/nzb-import.php ] && echo $INNODB_PATH/nzb-import.php not found && exit
-[ ! -f $INNODB_PATH/backfill.php ] && echo $INNODB_PATH/backfill.php not found && exit
 [ ! -f $NEWZNAB_PATH/update_releases.php ] && echo $NEWZNAB_PATH/update_releases.php not found && exit
 [ ! -f $NEWZNAB_PATH/update_predb.php ] && echo $NEWZNAB_PATH/update_predb.php not found && exit
 [ ! -f $TESTING/removespecial.php ] && echo $TESTING/removespecial.php not found && exit
@@ -69,7 +69,7 @@ export MYSQL_CMD="UPDATE groups set backfill_target=backfill_target+1 where acti
 
 $TMUX new-session -d -s NewzNab -n NewzNab 'cd $NEWZNAB_PATH && echo "processNfos Working......" && sleep 30 && $PHP $NEWZNAB_PATH/postprocess_nfo.php'
 $TMUX selectp -t 0
-$TMUX splitw -v -p 75 'echo "import's Working......" && sleep 45 && ./my_import.sh'
+$TMUX splitw -v -p 75 'echo "imports Working......" && sleep 45 && ./my_import.sh'
 $TMUX selectp -t 0
 $TMUX splitw -h -p 66 'cd $NEWZNAB_PATH && echo "processAdditional Working......" && sleep 35 && $PHP $NEWZNAB_PATH/justpostprocessing.php'
 $TMUX splitw -h -p 50 'cd $NEWZNAB_PATH && echo "postProcessing Working......" && sleep 40 && $PHP $NEWZNAB_PATH/postprocessing.php'

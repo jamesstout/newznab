@@ -51,9 +51,7 @@ export MYSQL_CMD="UPDATE groups set backfill_target=backfill_target+1 where acti
 #check for files and exit if not found
 [ ! -f $NEWZNAB_PATH/justpostprocessing.php ] && echo $NEWZNAB_PATH/justpostprocessing.php not found && exit
 [ ! -f $NEWZNAB_PATH/postprocess_nfo.php ] && echo $NEWZNAB_PATH/postprocess_nfo.php not found && exit
-[ ! -f $NEWZNAB_PATH/postprocess_games.php ] && echo $NEWZNAB_PATH/postprocess_games.php not found && exit
-[ ! -f $NEWZNAB_PATH/postprocess_tvrage.php ] && echo $NEWZNAB_PATH/postprocess_tvrage.php not found && exit
-[ ! -f $NEWZNAB_PATH/postprocess_books.php ] && echo $NEWZNAB_PATH/postprocess_books.php not found && exit
+[ ! -f $NEWZNAB_PATH/postprocessing.php ] && echo $NEWZNAB_PATH/postprocessing.php not found && exit
 [ ! -f $INNODB_PATH/update_binaries.php ] && echo $INNODB_PATH/update_binaries.php not found && exit
 [ ! -f $INNODB_PATH/nzb-import.php ] && echo $INNODB_PATH/nzb-import.php not found && exit
 [ ! -f $INNODB_PATH/backfill.php ] && echo $INNODB_PATH/backfill.php not found && exit
